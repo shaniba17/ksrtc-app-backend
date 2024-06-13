@@ -62,6 +62,24 @@ app.post("/login",(req,res)=>{
     )
     })
     
+    app.post("/view",(req,res)=>{
+        let token = req.headers["token"]
+        jwt.verify(token,"bus-app",(error,decoded)=>{
+            if (error) {
+                res.json({"status":"unauthorized access"})
+            } else {
+                if(decoded)
+                    {
+                        busmodel.find().then(
+                            (response)=>{
+                                res.json(response)
+                            }
+                        ).catch()
+                    }
+            }
+        })
+        
+    })
 
 app.listen(8080,()=>
 {
