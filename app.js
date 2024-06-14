@@ -81,7 +81,14 @@ app.post("/login",(req,res)=>{
         
     })
 
-
+    app.post("/add",(req,res)=>
+        {   
+            let input=req.body
+            let bususers=new busmodel(input)
+            bususers.save()
+            res.send({"status":"success"})
+        })
+        
 
 
 app.listen(8080,()=>
